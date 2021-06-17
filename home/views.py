@@ -1,9 +1,15 @@
 from django.shortcuts import render , HttpResponse
 from django.contrib import messages
 from .models import Contact
+from blog.models import Post
 # Create your views here.
 def home(request):
-    return render(request , 'home/home.html')
+    allposts = Post.objects.all()
+    
+    context = {
+        'allposts' : allposts[len(allposts)-3:len(allposts)]
+    }
+    return render(request , 'home/home.html' , context)
 
 
 def contact(request):
@@ -18,6 +24,7 @@ def contact(request):
         else:
             con = Contact(name = name , email = email , phone = phone , message = message)
             con.save()
+            
             messages.success(request , "Your message has been sent!")
         return render(request , 'home/contact.html')
     return render(request , 'home/contact.html')
@@ -25,3 +32,15 @@ def contact(request):
 
 def about(request):
     return render(request , 'home/about.html')
+
+def search(request):
+
+    query1 = request.GET.get('query' , '')
+    query = query1.lower()
+    allposts = Post.objects.all()
+    posts = []
+    for post in allposts:
+        if query in post.title.lower() or query in post.author.lower() or query in post.content.lower():
+            posts.append(post)
+        
+    return render(request,'home/search.html' , {'allposts' : posts , 'query':query1})
