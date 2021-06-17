@@ -1,53 +1,158 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-{% block css %}{% endblock css %}
-    <title>{% block title %}{% endblock title %}</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a href="/admin" target="_blank" class="navbar-brand">iCoder</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link {% block homeactive %}{% endblock homeactive %}" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% block blogactive %}{% endblock blogactive %}" href="/blog">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% block conactive %}{% endblock conactive %}" href="/contact">Contact us</a>
-        </li>
-        <li class="nav-item dropdown">
-         <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="/about">About us</a>
-        </li>
-      </ul>
-      <form class="d-flex" method="GET" action="/search/">
-        <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+  {% block css %}{% endblock css %}
+  <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a href="/admin" target="_blank" class="navbar-brand">iCoder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% block homeactive %}{% endblock homeactive %}" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block blogactive %}{% endblock blogactive %}" href="/blog">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block conactive %}{% endblock conactive %}" href="/contact">Contact us</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="/about">About us</a>
+          </li>
+        </ul>
+        <form class="d-flex" method="GET" action="/search/">
+          <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#loginmodal">
+          Log in
+        </button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#signupmodal">
+          Sign up
+        </button>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- Modal -->
+  <!-- signup modal -->
+  <div class="modal fade" id="signupmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="signupmodal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Sign up form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form autocomplete="off" method="POST">{% csrf_token %}
+            <div class="row mb-2">
+              <div class="col">
+                <label for="inputfname" class="form-label">First name</label>
+                <input type="text" class="form-control" name="firstname" aria-label="First name">
+              </div>
+              <div class="col">
+                <label for="inputfname" class="form-label">Last name</label>
+                <input type="text" class="form-control" name="lastname" aria-label="Last name">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+              <div class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" name="password1" placeholder="Choose your password" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Confirm password</label>
+              <input type="password" name="password2" class="form-control">
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
   </div>
-</nav>
 
-{% for message in messages %}
-<div class=" alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-  <strong>Message: </strong> {{ message }}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
-{% endfor %}
+  <!-- login modal -->
+  <div class="modal fade" id="loginmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="signupmodal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Log in form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form autocomplete="off" method="POST">{% csrf_token %}
+            <!-- <div class="row mb-2">
+              <div class="col">
+                <label for="inputfname" class="form-label">First name</label>
+                <input type="text" class="form-control" name="firstname" aria-label="First name">
+              </div>
+              <div class="col">
+                <label for="inputfname" class="form-label">Last name</label>
+                <input type="text" class="form-control" name="lastname" aria-label="Last name">
+              </div>
+            </div> -->
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" name="lemail" aria-describedby="emailHelp">
+              <div class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" name="lpassword1" placeholder="Enter your password" class="form-control">
+            </div>
+            <!-- <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Confirm password</label>
+              <input type="password" name="password2" class="form-control">
+            </div> -->
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+          </form>
+        </div>
 
-    {% block main %}{% endblock main %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+      </div>
+    </div>
+  </div>
+  {% for message in messages %}
+  <div class=" alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message: </strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+
+  {% block main %}{% endblock main %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
   {% block js %}{% endblock js %}
-  </body>
+</body>
+
 </html>
