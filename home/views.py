@@ -1,4 +1,4 @@
-from django.shortcuts import render , HttpResponse
+from django.shortcuts import render , HttpResponse , redirect
 from django.contrib import messages
 from .models import Contact
 from django.contrib.auth.models import User
@@ -54,13 +54,13 @@ def handlesignup(request):
             email = request.POST.get('email' , '')
             password1 = request.POST.get('password1' , '')
             password2 = request.POST.get('password2' , '')
-            uname = firstname + lastname
+            uname = request.POST.get('uname' , '')
             if(password1 != password2):
                 messages.error(request , 'Two password fields did not match! Try again')
             elif not uname.isalnum():
-                messages.error(request , 'First name and last name must be alphanumeric (not including punctuations like !@#$%^&*()_+-=). Try again')                
+                messages.error(request , 'Username must be alphanumeric (not including punctuations like !@#$%^&*()_+-=). Try again')                
             elif len(uname) > 70:
-                messages.error(request , 'First name or last name is too long. Try again')                
+                messages.error(request , 'Username is too long. Try again')                
             else:
                 user = User.objects.create_user(uname , email , password1)
                 user.first_name = firstname
@@ -70,11 +70,11 @@ def handlesignup(request):
 
         except Exception as e:
             messages.error(request , "There has been some error! Account not created. Try using different keywords")  
-            return render(request , 'home/singup.html') 
+            return redirect('/') 
     else:
         messages.error(request , "There has been some error! Account not created. Try using different keywords")  
-        return render(request , 'home/singup.html') 
-    return render(request , 'home/singup.html')    
+        return redirect('/')
+    return redirect('/')   
 
 
 
