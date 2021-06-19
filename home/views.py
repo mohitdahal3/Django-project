@@ -1,6 +1,7 @@
 from django.shortcuts import render , HttpResponse
 from django.contrib import messages
 from .models import Contact
+from django.contrib.auth.models import User
 from blog.models import Post
 # Create your views here.
 def home(request):
@@ -44,3 +45,42 @@ def search(request):
             posts.append(post)
         
     return render(request,'home/search.html' , {'allposts' : posts , 'query':query1})
+
+def handlesignup(request):
+    if request.method == "POST":
+        try:
+            firstname = request.POST.get('firstname' , '')
+            lastname = request.POST.get('lastname' , '')
+            email = request.POST.get('email' , '')
+            password1 = request.POST.get('password1' , '')
+            password2 = request.POST.get('password2' , '')
+            uname = firstname + lastname
+            if(password1 != password2):
+                messages.error(request , 'Two password fields did not match! Try again')
+            elif not uname.isalnum():
+                messages.error(request , 'First name and last name must be alphanumeric (not including punctuations like !@#$%^&*()_+-=). Try again')                
+            elif len(uname) > 70:
+                messages.error(request , 'First name or last name is too long. Try again')                
+            else:
+                user = User.objects.create_user(uname , email , password1)
+                user.first_name = firstname
+                user.last_name = lastname
+                user.save()
+                messages.success(request , 'Your account has been sucessfully created!')
+
+        except Exception as e:
+            messages.error(request , "There has been some error! Account not created. Try using different keywords")  
+            return render(request , 'home/singup.html') 
+    else:
+        messages.error(request , "There has been some error! Account not created. Try using different keywords")  
+        return render(request , 'home/singup.html') 
+    return render(request , 'home/singup.html')    
+
+
+
+def handlelogin(request):
+    return HttpResponse('handlelogin')   
+
+
+def handlelogout(request):
+    return HttpResponse('handlelogout')    

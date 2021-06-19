@@ -62,29 +62,30 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form autocomplete="off" method="POST">{% csrf_token %}
+          <form autocomplete="off" method="POST" action="/signup/">{% csrf_token %}
+            
             <div class="row mb-2">
               <div class="col">
                 <label for="inputfname" class="form-label">First name</label>
-                <input type="text" class="form-control" name="firstname" aria-label="First name">
+                <input type="text" class="form-control" required name="firstname" aria-label="First name">
               </div>
               <div class="col">
                 <label for="inputfname" class="form-label">Last name</label>
-                <input type="text" class="form-control" name="lastname" aria-label="Last name">
+                <input type="text" class="form-control" required name="lastname" aria-label="Last name">
               </div>
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
+              <input type="email" class="form-control" required name="email" aria-describedby="emailHelp">
               <div class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" name="password1" placeholder="Choose your password" class="form-control">
+              <input type="password" name="password1" required placeholder="Choose your password" class="form-control">
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Confirm password</label>
-              <input type="password" name="password2" class="form-control">
+              <input type="password" name="password2" required class="form-control">
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Sign up</button>
@@ -119,12 +120,12 @@
             </div> -->
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" name="lemail" aria-describedby="emailHelp">
+              <input type="email" class="form-control" required name="lemail" aria-describedby="emailHelp">
               <div class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" name="lpassword1" placeholder="Enter your password" class="form-control">
+              <input type="password" name="lpassword1" required placeholder="Enter your password" class="form-control">
             </div>
             <!-- <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Confirm password</label>
