@@ -116,7 +116,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form autocomplete="off" method="POST">{% csrf_token %}
+          <form autocomplete="off" action="/login/" method="POST">{% csrf_token %}
             <!-- <div class="row mb-2">
               <div class="col">
                 <label for="inputfname" class="form-label">First name</label>

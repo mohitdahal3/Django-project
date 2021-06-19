@@ -1,7 +1,8 @@
 from django.shortcuts import render , HttpResponse , redirect
 from django.contrib import messages
 from .models import Contact
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate , login , logout
+from django.contrib.auth.models import User 
 from blog.models import Post
 # Create your views here.
 def home(request):
@@ -79,6 +80,18 @@ def handlesignup(request):
 
 
 def handlelogin(request):
+    if request.method == "POST":
+        loginusername = request.POST.get('luname' , '')
+        loginpassword = request.POST.get('lpassword1' , '')
+        user = authenticate(username=loginusername , password = loginpassword)
+        if user is not None:
+            login(request , user)
+            messages.success(request , "Logged in successfully!")
+            return redirect('/')
+        else:
+            messages.error(request , "Login failed!")    
+            return redirect('/')
+
     return HttpResponse('handlelogin')   
 
 
