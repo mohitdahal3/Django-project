@@ -86,7 +86,8 @@ def handlelogin(request):
         user = authenticate(username=loginusername , password = loginpassword)
         if user is not None:
             login(request , user)
-            messages.success(request , "Logged in successfully!")
+            
+            messages.success(request , "logged in sucessfully!")
             return redirect('/')
         else:
             messages.error(request , "Login failed!")    
@@ -96,4 +97,5 @@ def handlelogin(request):
 
 
 def handlelogout(request):
+    
     return HttpResponse('handlelogout')    
