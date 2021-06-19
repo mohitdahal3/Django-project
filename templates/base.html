@@ -38,13 +38,23 @@
           <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        {% if user.is_authenticated %}
+        <span class="badge bg-success mx-2">Welcome {{request.user}}</span>
+        <form action="/logout/" method="POST">{% csrf_token %}
+        <button type="submit" class="btn btn-danger">Log out</button>
+      </form>
+        {% else %}
         <!-- Button trigger modal -->
+
         <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#loginmodal">
           Log in
         </button>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#signupmodal">
           Sign up
         </button>
+
+
+        {% endif %}
       </div>
     </div>
   </nav>
@@ -63,10 +73,10 @@
         </div>
         <div class="modal-body">
           <form autocomplete="off" method="POST" action="/signup/">{% csrf_token %}
-            
-            
-            
-            
+
+
+
+
             <div class="row mb-2">
               <div class="col">
                 <label for="inputfname" class="form-label">First name</label>
@@ -130,7 +140,7 @@
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Username</label>
               <input type="text" class="form-control" required name="luname" aria-describedby="emailHelp">
-              
+
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>

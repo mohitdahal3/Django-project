@@ -71,11 +71,12 @@ def handlesignup(request):
 
         except Exception as e:
             messages.error(request , "There has been some error! Account not created. Try using different keywords")  
+            
             return redirect('/') 
     else:
-        messages.error(request , "There has been some error! Account not created. Try using different keywords")  
+        messages.error(request , "There has been some error!")  
         return redirect('/')
-    return redirect('/')   
+    return HttpResponse('bad request')  
 
 
 
@@ -87,15 +88,21 @@ def handlelogin(request):
         if user is not None:
             login(request , user)
             
-            messages.success(request , "logged in sucessfully!")
+            messages.success(request , "You are sucessfully logged in!")
             return redirect('/')
         else:
             messages.error(request , "Login failed!")    
             return redirect('/')
 
-    return HttpResponse('handlelogin')   
+    return HttpResponse('bad request')   
 
 
 def handlelogout(request):
-    
-    return HttpResponse('handlelogout')    
+    try:
+        logout(request)
+        messages.success(request , "You are successfully logged out")
+        return redirect('/')
+    except:
+        messages.error(request , "There has been some error!")    
+        return redirect('/')
+    return HttpResponse('bad request')    
