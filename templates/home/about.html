@@ -2,6 +2,121 @@
 
 {% block title %}About us{% endblock title %}
 {% block aboutactive %}active{% endblock aboutactive %}
+{% block css %}
+    <style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #474e5d;
+  color: white;
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+.myrow{
+    display: flex;
+    justify-content: space-around;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+    text-decoration: none;
+}
+
+.button:hover {
+  background-color: #555;
+  color: black;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.footer {
+    top: 1vh;
+    position: relative;
+    width: 100%;
+    padding: 0.5rem 0;
+    border-top: .05rem solid #e5e5e5;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+{% endblock css %}
 {% block main %}
-    this is about
+<div class="about-section">
+  <h1>About Us</h1>
+  <p>I am a student but currently i am learning django framework of python. </p>
+  <p>I am in a learning phase on the way to Full Stack Software Developer.</p>
+</div>
+
+<h2 style="text-align:center" class="my-3">Our Team (Bascally only me)</h2>
+<div class="myrow">
+  <div class="column">
+    <div class="card">
+      
+      <div class="container">
+        <h2>Mohit Dahal</h2>
+        <p class="title">Front-end and Backend Designer</p>
+        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>mohitdahal3@gmail.com</p>
+        <p><a href="/contact/" role="button" class="button">Contact me</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% load static %}
+<div class="footer">
+    <a target="_blank" href="https://www.facebook.com/profile.php?id=100022852819584"><img class="mx-2" src="{% static 'home/facebook.png' %}" alt="Facebook"></a>
+    <a target="_blank" href="https://www.github.com/mohitdahal3"><img class="mx-2" src="{% static 'home/github.png' %}" alt="Github"></a>
+</div>
 {% endblock main %}

@@ -98,11 +98,12 @@ def handlelogin(request):
 
 
 def handlelogout(request):
-    try:
-        logout(request)
-        messages.success(request , "You are successfully logged out")
-        return redirect('/')
-    except:
-        messages.error(request , "There has been some error!")    
-        return redirect('/')
+    if request.method == "POST":
+        try:
+            logout(request)
+            messages.success(request , "You are successfully logged out")
+            return redirect('/')
+        except:
+            messages.error(request , "There has been some error!")    
+            return redirect('/')
     return HttpResponse('bad request')    
