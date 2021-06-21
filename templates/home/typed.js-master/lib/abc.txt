@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <title>Typed.js</title>
+  
+    
+<style>
+    body {
+        background-color: white;
+        font-family: Roboto, Oxygen, Ubuntu, Cantarell,
+            'Open Sans', 'Helvetica Neue', sans-serif;
+  
+    }
+  
+    .text-slider-items {
+        display: none;
+    }
+  
+    .heading {
+        margin-top: 200px;
+        text-align: center;
+    }
+  
+    .heading h1 {
+        color: limegreen;
+        font-size: 70px;
+    }
+  
+    .heading h3 {
+        color: black;
+        font-size: 20px;
+    }
+</style>
+</head>
+  
+<body>
+    <div class="heading">
+        <h1>GeeksforGeeks</h1>
+        <h3>
+            <span class="text-slider-items">
+                A computer Science portal for 
+                geeks, A place to pratice code
+            </span>
+            <strong class="text-slider"></strong>
+  
+        </h3>
+    </div>
+    <!-- Import typed.min.js file from typed.js folder -->
+    <script src=
+        "./typed.min.js">
+    </script>
+      
+    <!-- Add jquery cdn -->
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+  
+    <!-- Add this script for successful 
+        implementation of typed.js  -->
+    <script>
+        if ($(".text-slider").length == 1) {
+              
+            var typed_strings = 
+                $(".text-slider-items").text();
+  
+            var typed = new Typed(".text-slider", {
+                strings: typed_strings.split(", "),
+                typeSpeed: 50,
+                loop: true,
+                backDelay: 900,
+                backSpeed: 30,
+            });
+        }
+    </script>
+</body>
+  
+</html>
