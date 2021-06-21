@@ -9,10 +9,10 @@
 {% block main %}
 <div class="container">
   <div class="jumbotron my-3">
-    <h1 class="display-4">Welcome to iCoder!</h1>
-    <p class="lead">This is a website made to help upload simple blogposts and articles by the user.</p>
-    <hr class="my-4">
-    <p>It uses a popular python framework <strong>Django</strong></p>
+  <h1 class="display-4">Welcome to iCoder!</h1>
+     <p class="lead"><strong class="text-slider"></strong></p>
+      
+    
     <a class="btn btn-primary btn-lg" href="/blog/" role="button">Go to Blog</a>
   </div>
 </div>
@@ -67,7 +67,21 @@
 {% endblock css %}
 
 
-
 {% block js %}
-  
+{% load static %}
+<script src="{% static 'home/typed.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    if ($(".text-slider").length == 1) {
+        var typed_strings = "Welcome to iCoder home!..This is a website made to upload simple blogposts and articles by the user..It uses popular python framework called Django for the server side programming"
+        var typed = new Typed(".text-slider", {
+            strings: typed_strings.split(".."),
+            typeSpeed: 50,
+            loop: true,
+            backDelay: 900,
+            backSpeed: 30,
+        });
+    }
+</script>
 {% endblock js %}
