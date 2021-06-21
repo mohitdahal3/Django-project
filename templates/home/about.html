@@ -2,6 +2,10 @@
 
 {% block title %}About us{% endblock title %}
 {% block aboutactive %}active{% endblock aboutactive %}
+{% block favicon %}
+{% load static %}
+<link rel="shortcut icon" href="{% static 'home/about.ico' %}" type="image/x-icon">
+{% endblock favicon %}
 {% block css %}
     <style>
 body {

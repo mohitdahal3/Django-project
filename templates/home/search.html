@@ -2,6 +2,10 @@
 
 {% block title %}Search results{% endblock title %}
 {% block blogactive %}active{% endblock blogactive %}
+{% block favicon %}
+{% load static %}
+<link rel="shortcut icon" href="{% static 'home/blog.ico' %}" type="image/x-icon">
+{% endblock favicon %}
 {% block main %}
     <div class="container my-3">
     {% if allposts|length > 0 %}
